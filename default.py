@@ -27,7 +27,6 @@ ColorBox_function_map = {
         'twotone':      Utils.twotone,
         'posterize':    Utils.posterize,
         'distort':      Utils.distort,
-        'halftone':     Utils.halftone,
         'dataglitch':   Utils.dataglitch}
 ColorBox_settings_map = {
         'pixelsize':    Utils.set_pixelsize,
@@ -50,7 +49,7 @@ class ColorBoxMain:
             xbmcplugin.endOfDirectory(self.handle)
         Utils.Load_Colors_Dict()
         monitor = xbmc.Monitor()
-        while self.daemon and not monitor.abortRequested():
+        while self.daemon and not xbmc.abortRequested:
             Utils.Show_Percentage()
             #HOME.setProperty('WidgetNameLabelVar', xbmc.getInfoLabel("Control.GetLabel(7973)").replace("[CR]", " "))
             #HOME.setProperty('HomeHeaderSubline', xbmc.getInfoLabel("Control.GetLabel(7974)").replace("[CR]", " "))
@@ -169,7 +168,7 @@ class ColorBoxMain:
                             HOME.setProperty(self.wpnam + "ImageCColor", cimagecolor)
                         except:
                             Utils.log("Could not process image for image_now_MULTI daemon %s" % self.wpnam)
-            monitor.waitForAbort(0.2)
+            xbmc.sleep(100)
     def _init_vars(self):
         HOME.setProperty("OldImageColorFIVE", "FFffffff")
         HOME.setProperty("ImageColorFIVE", "FFffffff")
